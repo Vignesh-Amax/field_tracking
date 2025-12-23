@@ -1,0 +1,362 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "OF-TASK-.YYYY.-.#####",
+ "creation": "2025-11-18 12:20:52.767302",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "subject",
+  "calls_type",
+  "column_break_pqri",
+  "status",
+  "priority",
+  "doctor_calls_section",
+  "doctor",
+  "product_introduction",
+  "reminder",
+  "follow_up",
+  "payment",
+  "ot_attend",
+  "demonstration",
+  "marketing_activity_for_doctor_calls",
+  "miscellaneous",
+  "column_break_qmoo",
+  "miscellaneous_reason",
+  "address",
+  "pincode",
+  "longitude",
+  "latitude",
+  "paramedical_staff_calls_section",
+  "technical_calls",
+  "column_break_tiwp",
+  "product_training",
+  "column_break_lgto",
+  "marketing_activity_for_paramedical_staff_calls",
+  "distribution_calls_section",
+  "orders",
+  "complaint",
+  "column_break_wxfy",
+  "payment_receiving",
+  "product_introduction_training",
+  "meeting_section",
+  "conducted_by",
+  "meeting_link",
+  "column_break_nzkv",
+  "employee_name",
+  "section_break_zeqy",
+  "attachments_file_details",
+  "details_section",
+  "details"
+ ],
+ "fields": [
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "Subject"
+  },
+  {
+   "fieldname": "calls_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Calls Type",
+   "options": "\nDoctor Calls\nParamedical Staff Calls\nDistribution Calls\nMeeting"
+  },
+  {
+   "fieldname": "column_break_pqri",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "\nPending\nIn Progress\nCompleted\nCancelled"
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Priority",
+   "options": "\nLow\nHigh"
+  },
+  {
+   "fieldname": "details_section",
+   "fieldtype": "Section Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "details",
+   "fieldtype": "Text Editor",
+   "label": "Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "miscellaneous",
+   "fieldtype": "Check",
+   "label": "Miscellaneous"
+  },
+  {
+   "fieldname": "column_break_qmoo",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "miscellaneous",
+   "fieldname": "miscellaneous_reason",
+   "fieldtype": "Small Text",
+   "label": "Miscellaneous Reason"
+  },
+  {
+   "depends_on": "eval:doc.calls_type == 'Paramedical Staff Calls'",
+   "fieldname": "paramedical_staff_calls_section",
+   "fieldtype": "Section Break",
+   "label": "Calls Details"
+  },
+  {
+   "depends_on": "eval:doc.calls_type == 'Doctor Calls'",
+   "fieldname": "doctor_calls_section",
+   "fieldtype": "Section Break",
+   "label": "Calls Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "technical_calls",
+   "fieldtype": "Check",
+   "label": "Technical Calls"
+  },
+  {
+   "default": "0",
+   "fieldname": "product_training",
+   "fieldtype": "Check",
+   "label": "Product Training"
+  },
+  {
+   "depends_on": "eval:doc.calls_type == 'Distribution Calls'",
+   "fieldname": "distribution_calls_section",
+   "fieldtype": "Section Break",
+   "label": "Calls Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "orders",
+   "fieldtype": "Check",
+   "label": "Orders"
+  },
+  {
+   "default": "0",
+   "fieldname": "complaint",
+   "fieldtype": "Check",
+   "label": "Complaint "
+  },
+  {
+   "default": "0",
+   "fieldname": "payment_receiving",
+   "fieldtype": "Check",
+   "label": "Payment Receiving"
+  },
+  {
+   "default": "0",
+   "fieldname": "product_introduction_training",
+   "fieldtype": "Check",
+   "label": "Product Introduction / Training"
+  },
+  {
+   "fieldname": "column_break_wxfy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_tiwp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "depends_on": "eval:doc.calls_type == 'Meeting'",
+   "fieldname": "meeting_section",
+   "fieldtype": "Section Break",
+   "label": "Meeting"
+  },
+  {
+   "fieldname": "conducted_by",
+   "fieldtype": "Link",
+   "label": "Conducted by ",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_nzkv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "conducted_by.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data"
+  },
+  {
+   "default": "0",
+   "fieldname": "reminder",
+   "fieldtype": "Check",
+   "label": "Reminder"
+  },
+  {
+   "default": "0",
+   "fieldname": "product_introduction",
+   "fieldtype": "Check",
+   "label": "Product Introduction"
+  },
+  {
+   "default": "0",
+   "fieldname": "follow_up",
+   "fieldtype": "Check",
+   "label": "Follow up"
+  },
+  {
+   "default": "0",
+   "fieldname": "payment",
+   "fieldtype": "Check",
+   "label": "Payment"
+  },
+  {
+   "fieldname": "meeting_link",
+   "fieldtype": "Small Text",
+   "label": "Meeting Link"
+  },
+  {
+   "fieldname": "section_break_zeqy",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "attachments_file_details",
+   "fieldtype": "Table",
+   "label": "Attachments File Details",
+   "options": "Attachments File Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "marketing_activity_for_doctor_calls",
+   "fieldtype": "Check",
+   "label": "Marketing Activity"
+  },
+  {
+   "fieldname": "column_break_lgto",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "marketing_activity_for_paramedical_staff_calls",
+   "fieldtype": "Check",
+   "label": "Marketing Activity"
+  },
+  {
+   "default": "0",
+   "fieldname": "demonstration",
+   "fieldtype": "Check",
+   "label": "Demonstration"
+  },
+  {
+   "default": "0",
+   "fieldname": "ot_attend",
+   "fieldtype": "Check",
+   "label": "OT Attend"
+  },
+  {
+   "fieldname": "doctor",
+   "fieldtype": "Link",
+   "label": "Doctor",
+   "options": "Doctor Master"
+  },
+  {
+   "fetch_from": "doctor.address",
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fetch_from": "doctor.pincode",
+   "fieldname": "pincode",
+   "fieldtype": "Data",
+   "label": "Pincode"
+  },
+  {
+   "fetch_from": "doctor.longitude",
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "Longitude"
+  },
+  {
+   "fetch_from": "doctor.latitude",
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "Latitude"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-11 17:30:16.666607",
+ "modified_by": "Administrator",
+ "module": "Field Tracking",
+ "name": "Field Task Old",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales Master Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Sales User",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

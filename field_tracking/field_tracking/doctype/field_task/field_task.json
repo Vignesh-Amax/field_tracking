@@ -1,0 +1,471 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "F-TASK-.YYYY.-.#####",
+ "creation": "2025-12-11 15:45:06.092897",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "activity_type",
+  "hospital_purpose",
+  "business_meeting_type",
+  "column_break_hlpp",
+  "status",
+  "priority",
+  "is_join",
+  "join_employee",
+  "join_employee_name",
+  "hospital_details_section",
+  "hospital",
+  "hospitan_name",
+  "doctor",
+  "doctor_name",
+  "column_break_ismb",
+  "hospital_address",
+  "hospital_pincode",
+  "hospital_longitude",
+  "hospital_latitude",
+  "column_break_mzba",
+  "product_introduction",
+  "bus_proposal",
+  "follow_up",
+  "payment",
+  "attend",
+  "demonstration",
+  "marketing_activity",
+  "miscellaneous",
+  "ctp_cme",
+  "negotiation",
+  "event_related",
+  "kol_visit",
+  "delivery",
+  "vendor_search",
+  "tender",
+  "order",
+  "distributor_details_section",
+  "distributor",
+  "distributor_name",
+  "column_break_qafb",
+  "distributor_address",
+  "distributor_pincode",
+  "distributor_longitude",
+  "distributor_latitude",
+  "column_break_wuka",
+  "orders",
+  "distributor_payment",
+  "complaint",
+  "account",
+  "distributor_product_introduction",
+  "staff_training",
+  "distributor_bus_proposal",
+  "business_meeting_details_section",
+  "employee",
+  "meeting_link",
+  "column_break_bznf",
+  "employee_name",
+  "business_meeting_address",
+  "section_break_xsdf",
+  "attachments_file_details",
+  "agenda_section",
+  "agenda"
+ ],
+ "fields": [
+  {
+   "fieldname": "activity_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Activity Type",
+   "options": "Hospital Visit\nDistributor Visit\nBusiness Meeting\nAdmin Work"
+  },
+  {
+   "depends_on": "eval:doc.activity_type == \"Hospital Visit\"",
+   "fieldname": "hospital_purpose",
+   "fieldtype": "Select",
+   "label": "Hospital Purpose",
+   "options": "Doctor Visit\nPara Medical Visit"
+  },
+  {
+   "depends_on": "eval:doc.activity_type == \"Business Meeting\"",
+   "fieldname": "business_meeting_type",
+   "fieldtype": "Select",
+   "label": "Business Meeting Type",
+   "options": "Online\nOffline"
+  },
+  {
+   "depends_on": "eval:doc.status == 'Completed'",
+   "fieldname": "column_break_hlpp",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending\nIn Progress\nCompleted\nCancelled"
+  },
+  {
+   "depends_on": "eval:doc.activity_type == \"Hospital Visit\"",
+   "fieldname": "priority",
+   "fieldtype": "Select",
+   "label": "Customer Type",
+   "options": "\nExisting\nNew"
+  },
+  {
+   "depends_on": "eval:doc.activity_type == \"Hospital Visit\"",
+   "fieldname": "hospital_details_section",
+   "fieldtype": "Section Break",
+   "label": "Hospital Details"
+  },
+  {
+   "fieldname": "hospital",
+   "fieldtype": "Link",
+   "label": "Hospital",
+   "options": "Hospital Master"
+  },
+  {
+   "fieldname": "doctor",
+   "fieldtype": "Link",
+   "label": "Doctor",
+   "options": "Doctor Master"
+  },
+  {
+   "fieldname": "column_break_ismb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "doctor.full_name",
+   "fieldname": "doctor_name",
+   "fieldtype": "Data",
+   "label": "Doctor Name"
+  },
+  {
+   "fetch_from": "hospital.hospital_name",
+   "fieldname": "hospitan_name",
+   "fieldtype": "Data",
+   "label": "Hospitan Name"
+  },
+  {
+   "fetch_from": "hospital.address",
+   "fieldname": "hospital_address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fetch_from": "hospital.pincode",
+   "fieldname": "hospital_pincode",
+   "fieldtype": "Int",
+   "label": "Pincode"
+  },
+  {
+   "fetch_from": "hospital.longitude",
+   "fieldname": "hospital_longitude",
+   "fieldtype": "Data",
+   "label": "Longitude"
+  },
+  {
+   "fetch_from": "hospital.latitude",
+   "fieldname": "hospital_latitude",
+   "fieldtype": "Data",
+   "label": "Latitude"
+  },
+  {
+   "depends_on": "eval:doc.activity_type == \"Distributor Visit\"",
+   "fieldname": "distributor_details_section",
+   "fieldtype": "Section Break",
+   "label": "Distributor Details"
+  },
+  {
+   "fieldname": "distributor",
+   "fieldtype": "Link",
+   "label": "Distributor",
+   "options": "Distributor Master"
+  },
+  {
+   "fetch_from": "distributor.distributor_name",
+   "fieldname": "distributor_name",
+   "fieldtype": "Data",
+   "label": "Distributor Name"
+  },
+  {
+   "fieldname": "column_break_qafb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "distributor.address",
+   "fieldname": "distributor_address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fetch_from": "distributor.pincode",
+   "fieldname": "distributor_pincode",
+   "fieldtype": "Int",
+   "label": "Pincode"
+  },
+  {
+   "fetch_from": "distributor.longitude",
+   "fieldname": "distributor_longitude",
+   "fieldtype": "Float",
+   "label": "Longitude"
+  },
+  {
+   "fetch_from": "distributor.latitude",
+   "fieldname": "distributor_latitude",
+   "fieldtype": "Float",
+   "label": "Latitude"
+  },
+  {
+   "depends_on": "eval:doc.activity_type == \"Business Meeting\"",
+   "fieldname": "business_meeting_details_section",
+   "fieldtype": "Section Break",
+   "label": "Business Meeting Details"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "depends_on": "eval:doc.business_meeting_type == 'Online'",
+   "fieldname": "meeting_link",
+   "fieldtype": "Small Text",
+   "label": "Meeting Link"
+  },
+  {
+   "fieldname": "column_break_bznf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fieldname": "section_break_xsdf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "attachments_file_details",
+   "fieldtype": "Table",
+   "label": "Attachments File Details",
+   "options": "Attachments File Details"
+  },
+  {
+   "depends_on": "eval:doc.business_meeting_type == 'Offline'",
+   "fieldname": "business_meeting_address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "agenda_section",
+   "fieldtype": "Section Break",
+   "label": "Agenda"
+  },
+  {
+   "fieldname": "agenda",
+   "fieldtype": "Text Editor",
+   "label": "Agenda"
+  },
+  {
+   "fieldname": "column_break_mzba",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "product_introduction",
+   "fieldtype": "Check",
+   "label": "Product Introduction"
+  },
+  {
+   "default": "0",
+   "fieldname": "bus_proposal",
+   "fieldtype": "Check",
+   "label": "Bus Proposal"
+  },
+  {
+   "default": "0",
+   "fieldname": "follow_up",
+   "fieldtype": "Check",
+   "label": "Follow up"
+  },
+  {
+   "default": "0",
+   "fieldname": "payment",
+   "fieldtype": "Check",
+   "label": "Payment"
+  },
+  {
+   "default": "0",
+   "fieldname": "attend",
+   "fieldtype": "Check",
+   "label": "Attend"
+  },
+  {
+   "default": "0",
+   "fieldname": "demonstration",
+   "fieldtype": "Check",
+   "label": "Demonstration"
+  },
+  {
+   "default": "0",
+   "fieldname": "marketing_activity",
+   "fieldtype": "Check",
+   "label": "Marketing Activity"
+  },
+  {
+   "default": "0",
+   "fieldname": "miscellaneous",
+   "fieldtype": "Check",
+   "label": "Miscellaneous"
+  },
+  {
+   "default": "0",
+   "fieldname": "ctp_cme",
+   "fieldtype": "Check",
+   "label": "CTP/CME"
+  },
+  {
+   "default": "0",
+   "fieldname": "negotiation",
+   "fieldtype": "Check",
+   "label": "Negotiation"
+  },
+  {
+   "default": "0",
+   "fieldname": "event_related",
+   "fieldtype": "Check",
+   "label": "Event Related"
+  },
+  {
+   "default": "0",
+   "fieldname": "kol_visit",
+   "fieldtype": "Check",
+   "label": "KOL Visit"
+  },
+  {
+   "default": "0",
+   "fieldname": "delivery",
+   "fieldtype": "Check",
+   "label": "Delivery"
+  },
+  {
+   "default": "0",
+   "fieldname": "vendor_search",
+   "fieldtype": "Check",
+   "label": "Vendor Search"
+  },
+  {
+   "default": "0",
+   "fieldname": "tender",
+   "fieldtype": "Check",
+   "label": "Tender"
+  },
+  {
+   "default": "0",
+   "fieldname": "order",
+   "fieldtype": "Check",
+   "label": "Order"
+  },
+  {
+   "fieldname": "column_break_wuka",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "orders",
+   "fieldtype": "Check",
+   "label": "Orders"
+  },
+  {
+   "default": "0",
+   "fieldname": "distributor_payment",
+   "fieldtype": "Check",
+   "label": "Payment"
+  },
+  {
+   "default": "0",
+   "fieldname": "complaint",
+   "fieldtype": "Check",
+   "label": "Complaint"
+  },
+  {
+   "default": "0",
+   "fieldname": "account",
+   "fieldtype": "Check",
+   "label": "Account"
+  },
+  {
+   "default": "0",
+   "fieldname": "distributor_product_introduction",
+   "fieldtype": "Check",
+   "label": "Product Introduction"
+  },
+  {
+   "default": "0",
+   "fieldname": "staff_training",
+   "fieldtype": "Check",
+   "label": "Staff Training"
+  },
+  {
+   "default": "0",
+   "fieldname": "distributor_bus_proposal",
+   "fieldtype": "Check",
+   "label": "Bus Proposal"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.status == 'Completed'",
+   "fieldname": "is_join",
+   "fieldtype": "Check",
+   "label": "Is Join"
+  },
+  {
+   "depends_on": "eval:doc.status == 'Completed'",
+   "fieldname": "join_employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "depends_on": "eval:doc.status == 'Completed'",
+   "fetch_from": "join_employee.employee_name",
+   "fieldname": "join_employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-16 21:19:42.527814",
+ "modified_by": "Administrator",
+ "module": "Field Tracking",
+ "name": "Field Task",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}
