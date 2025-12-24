@@ -462,29 +462,35 @@ def get_all_descendant_ids(root_employee_id):
 #         frappe.throw(f"Error: {str(e)}", frappe.ValidationError)
 
 @frappe.whitelist(allow_guest=False, methods=["GET"])
-def get_field_tasks_by_employee(employee_id=None, page_length=20, page_start=0):
+def get_field_tasks_by_employee(employee_id=None, page_length=20, page_start=0, status=None):
     if frappe.request.method != "GET":
         frappe.throw("Method not allowed", frappe.PermissionError)
-
     if not employee_id:
         frappe.throw("Employee ID is required", frappe.ValidationError)
-
     user_id = frappe.db.get_value("Employee", {"name": employee_id}, "user_id")
     if not user_id:
         frappe.throw(f"No User linked to Employee {employee_id}", frappe.DoesNotExistError)
-
     try:
         page_length = int(page_length) if str(page_length).isdigit() else 20
         page_start = int(page_start) if str(page_start).isdigit() else 0
 
-        # Get task names
-        owner_task_names = set(frappe.db.get_all("Field Task", filters={"owner": user_id}, pluck="name"))
+        owner_filters = {"owner": user_id}
+        if status is not None:
+            owner_filters["status"] = status
+
+        owner_task_names = set(frappe.db.get_all("Field Task", filters=owner_filters, pluck="name"))
+
         assigned_task_names = set()
-        assigned_candidates = frappe.db.sql("""
+        status_condition = ""
+        if status is not None:
+            status_condition = " AND status = %(status)s "
+
+        assigned_candidates = frappe.db.sql(f"""
             SELECT name, _assign
-            FROM `tabField Task`
+            FROM tabField Task
             WHERE _assign IS NOT NULL AND _assign != ''
-        """, as_dict=True)
+            {status_condition}
+        """, {"status": status}, as_dict=True)
 
         for task in assigned_candidates:
             try:
@@ -506,7 +512,6 @@ def get_field_tasks_by_employee(employee_id=None, page_length=20, page_start=0):
             order_by="idx"
         )
 
-        # Map activity_type to section labels
         ACTIVITY_TO_SECTION = {
             "Hospital Visit": "Hospital Details",
             "Distributor Visit": "Distributor Details",
@@ -514,33 +519,29 @@ def get_field_tasks_by_employee(employee_id=None, page_length=20, page_start=0):
             "Admin Work": None 
         }
 
-        # Build mapping: fieldname → section_label
         field_to_section = {}
         current_section = None
-
         for df in fields:
             if df.fieldtype == "Section Break":
                 current_section = df.label
             elif df.fieldtype == "Check":
                 field_to_section[df.fieldname] = current_section
 
-        # Reverse map: section_label → activity_type
         section_to_activity = {v: k for k, v in ACTIVITY_TO_SECTION.items() if v}
 
         complete_data = []
         for name in paginated_names:
             doc = frappe.get_doc("Field Task", name)
             doc_dict = doc.as_dict()
-
             activity_type = doc_dict.get("activity_type")
             expected_section = ACTIVITY_TO_SECTION.get(activity_type)
             subject_labels = []
-
             if expected_section:
-                for fieldname, label in [(f, frappe.get_meta("Field Task").get_field(f).label) for f in field_to_section]:
+                meta = frappe.get_meta("Field Task")
+                for fieldname in field_to_section:
                     if field_to_section[fieldname] == expected_section and doc_dict.get(fieldname) == 1:
+                        label = meta.get_field(fieldname).label
                         subject_labels.append(label)
-
             doc_dict["subject"] = ", ".join(subject_labels)
             complete_data.append(doc_dict)
 
@@ -553,7 +554,6 @@ def get_field_tasks_by_employee(employee_id=None, page_length=20, page_start=0):
             "page_length": page_length,
             "page_start": page_start
         }
-
     except Exception as e:
         frappe.log_error(frappe.get_traceback(), f"Error in get_field_tasks_by_employee for {employee_id}")
         frappe.throw(f"Error: {str(e)}", frappe.ValidationError)
