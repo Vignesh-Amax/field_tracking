@@ -1,0 +1,116 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{field_user}-{####}",
+ "creation": "2025-11-26 17:13:07.827313",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "field_user",
+  "longitude",
+  "latitude",
+  "column_break_tyfj",
+  "mobile_network",
+  "battery_percentage",
+  "status",
+  "address",
+  "section_break_pgrf",
+  "type_of_connection_column",
+  "wifi",
+  "network"
+ ],
+ "fields": [
+  {
+   "fieldname": "longitude",
+   "fieldtype": "Data",
+   "label": "Longitude"
+  },
+  {
+   "fieldname": "latitude",
+   "fieldtype": "Data",
+   "label": "Latitude"
+  },
+  {
+   "fieldname": "column_break_tyfj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "mobile_network",
+   "fieldtype": "Select",
+   "label": "Mobile Network",
+   "options": "\nNo Signal\nLow\nMedium\nHigh"
+  },
+  {
+   "fieldname": "battery_percentage",
+   "fieldtype": "Int",
+   "label": "Battery Percentage"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nCheck In\nCheck Out"
+  },
+  {
+   "fieldname": "section_break_pgrf",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "type_of_connection_column",
+   "fieldtype": "Column Break",
+   "label": "Type of Connection"
+  },
+  {
+   "default": "0",
+   "fieldname": "wifi",
+   "fieldtype": "Check",
+   "label": "Wifi"
+  },
+  {
+   "default": "0",
+   "fieldname": "network",
+   "fieldtype": "Check",
+   "label": "Network"
+  },
+  {
+   "fieldname": "field_user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Field User",
+   "options": "User"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-03 10:35:25.624206",
+ "modified_by": "Administrator",
+ "module": "Field Tracking",
+ "name": "Field User Log",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
